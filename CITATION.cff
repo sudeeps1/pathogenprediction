@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "Pathogen Prediction Protocol"
+message: "If you use this software, please cite the accompanying paper."
+authors:
+  - family-names: "Senivarapu"
+    given-names: "Sudeep"
+    affiliation: "University of North Texas, Department of Biology"
+  - family-names: "Coxe"
+    given-names: "Tallon"
+    affiliation: "University of North Texas, Department of Biology"
+  - family-names: "Murari"
+    given-names: "Anishsairam"
+    affiliation: "University of North Texas, Department of Biology"
+repository-code: "https://github.com/sudeeps1/pathogenprediction"
+abstract: >
+  A reproducible computational protocol for organism-level pathogenicity
+  classification from bacterial genomes using machine learning. Implements
+  k-mer SVM, Random Forest, and reverse-complement CNN pipelines.
+keywords:
+  - pathogenicity prediction
+  - bacterial genomes
+  - machine learning
+  - k-mer frequencies
+  - convolutional neural networks
+license: MIT
