@@ -13,16 +13,14 @@ A reproducible pipeline for predicting bacterial pathogenicity (HP/NHP) from gen
 If you use this code, please cite:
 
 ```bibtex
-@article{senivarapu2024pathogen,
+@article{senivarapu2026pathogen,
   author = {Senivarapu, Sudeep and Coxe, Tallon and Murari, Anishsairam},
   title = {Computational Protocol for Organism-Level Pathogenicity Classification from Bacterial Genomes Using Machine Learning},
-  journal = {[Journal Name]},
-  year = {[Year]},
+  journal = {Forthcoming},
+  year = {2026},
   note = {Code available at https://github.com/sudeeps1/pathogenprediction}
 }
 ```
-
-*(Update `[Journal Name]` and `[Year]` with your publication details.)*
 
 ## Requirements
 
