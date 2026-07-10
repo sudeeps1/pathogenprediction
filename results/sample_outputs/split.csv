@@ -1,0 +1,5 @@
+id,label,split
+G001,1,TRAIN
+G002,1,TRAIN
+G003,0,TRAIN
+G004,0,TEST

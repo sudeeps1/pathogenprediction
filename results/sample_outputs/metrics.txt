@@ -1,0 +1,8 @@
+Model: Sparse SVM
+Accuracy: 0.00
+
+Model: Random Forest
+Accuracy: 0.00
+
+Model: CNN
+Accuracy: 0.00

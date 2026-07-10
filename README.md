@@ -123,6 +123,32 @@ python scripts/score.py
 - `results/cnn_predictions.csv` – CNN predictions  
 - `results/metrics.txt` – Accuracy for each model  
 
+## Design Decisions & Model Architecture
+
+This protocol implements three distinct machine learning approaches to classify bacterial pathogenicity, optimized for genomic sequence characteristics:
+
+1. **L1-Regularized (Sparse) SVM**: Genomic 6-mer analysis produces a high-dimensional feature space ($4^6 = 4,096$ frequencies). We apply a Linear Support Vector Classifier (SVC) with an L1 regularization penalty. The L1 penalty forces the coefficients of non-informative k-mers to exactly zero, performing embedded feature selection and preventing overfitting in sparse feature spaces.
+2. **Random Forest (RF)**: While linear SVMs capture independent feature impacts, Random Forests model complex, non-linear interactions and epistatic combinations of k-mers without requiring explicit feature scaling. Configured with 500 estimators to ensure variance minimization.
+3. **Reverse-Complement CNN (RC-CNN)**: DNA is double-stranded and read orientations are arbitrary. To enforce strand invariance, the CNN evaluates both the forward sequence and its reverse complement. The model averages the forward and reverse logits to ensure predictions are identical regardless of which strand was sequenced.
+
+## Testing & Verification
+
+### Unit Tests
+A Python `unittest` suite verifies core pipeline functions, including k-mer generation/counting, one-hot encoding shapes, and reverse-complement flipping:
+```bash
+python tests/test_pipeline.py
+```
+
+### End-to-End Integration Demo
+To verify that the entire split, extraction, training, and scoring pipeline works without needing NCBI downloads, run:
+```bash
+python run_demo.py
+```
+This script generates a temporary mock dataset of 4 genomes, executes all processing steps, verifies outputs in the `results/` folder, and clean up.
+
+### Sample Outputs
+Sample predictions and metric runs from the demo integration are preserved in `results/sample_outputs/` for immediate reference.
+
 ## Data
 
 Labels follow `labels.csv` with columns `id,label` (1 = HP, 0 = NHP). Genome FASTA files go in `data/genomes/` as `{genome_id}.fna`.
