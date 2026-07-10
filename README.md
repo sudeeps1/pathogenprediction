@@ -1,12 +1,38 @@
 # Pathogen Prediction Protocol
 
-**Supplement to:** Senivarapu S, Coxe T, Murari A. Computational Protocol for Organism-Level Pathogenicity Classification from Bacterial Genomes Using Machine Learning. University of North Texas, Department of Biology.
+**Computational Protocol for Organism-Level Pathogenicity Classification from Bacterial Genomes Using Machine Learning**
 
-A reproducible pipeline for predicting bacterial pathogenicity (HP/NHP) from genomic sequences using three machine learning approaches:
+*Developed as part of the Department of Biology research at the University of North Texas.*
 
-1. **Sparse SVM** – 6-mer frequency features with L1-regularized linear SVM  
-2. **Random Forest** – same 6-mer features with 500 trees  
-3. **Reverse-complement CNN** – 250 bp DNA fragments with one-hot encoding and dual-strand averaging  
+Bacterial pathogen identification is critical for clinical diagnostics, public health surveillance, and biodefense. Traditional culture-based methods or alignment-heavy sequence queries are slow and struggle with novel or highly mutated strains. This repository provides a state-of-the-art, alignment-free computational pipeline that extracts high-dimensional sequence features (k-mers) and DNA structural representations directly from raw genomic files, classifying bacterial organisms into **human pathogens (HP)** or **non-human pathogens (NHP)** using three optimized machine learning paradigms: Sparse SVM, Random Forests, and Reverse-Complement Convolutional Neural Networks.
+
+## Programmatic API & Usage Examples
+
+While the pipeline is fully executable via the shell scripts in the `scripts/` directory, the core utilities can also be integrated directly into custom Python pipelines.
+
+### 1. Extracting K-Mer Frequencies
+```python
+from scripts.kmer_table import count_kmers, compute_kmer_frequencies
+
+# Analyze custom raw DNA sequence sequence
+seq = "ATGCGATCGATCGATCGATCGATCGATCGATC"
+counts = count_kmers(seq, k=6)
+frequencies = compute_kmer_frequencies(counts)
+
+print(f"Computed frequencies for {len(frequencies)} distinct 6-mers.")
+```
+
+### 2. Reverse-Complement Invariant Encoding
+```python
+import torch
+from scripts.train_rc_cnn import onehot_encode, reverse_complement
+
+seq = "ATGCGATCG"
+# Generate strand-invariant representations
+forward_encoding = onehot_encode(seq).T               # Shape: (4, L)
+rc_sequence = reverse_complement(seq)
+rc_encoding = onehot_encode(rc_sequence).T           # Shape: (4, L)
+```
 
 ## Citation
 
